@@ -27,6 +27,7 @@ class SimplicialComplex:
 
     # get the lower dimension faces of a simplex
     # so we get k-1 faces from k faces
+    # for example a triangle (2-face) has 3 edges (1-faces) and 3 vertices (0-faces)
     # Boundary operator is used to calculate betti numbers
     def boundary_operator(self, i):
         source_simplices = self.n_faces(i)
@@ -35,15 +36,17 @@ class SimplicialComplex:
         if len(target_simplices) == 0:
             # Dictionary of Keys matrix
             S = dok_matrix((1, len(source_simplices)), dtype=np.float64)
+            # S = [1 1 1 1 ]
             S[0, 0:len(source_simplices)] = 1
         else:
+            # 增加索引:
             source_simplices_dict = {
                 source_simplices[j]: j for j in range(len(source_simplices))
             }
             target_simplices_dict = {
                 target_simplices[i]: i for i in range(len(target_simplices))
             }
-
+            # 建立k維simplex到k-1維simplex的boundary矩陣
             S = dok_matrix(
                 (len(target_simplices), len(source_simplices)), dtype=np.float64
             )

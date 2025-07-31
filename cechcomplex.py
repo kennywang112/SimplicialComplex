@@ -7,7 +7,6 @@ from abssimcomplex import SimplicialComplex
 
 
 def circumradius(points):
-    """Calculate circumradius of a set of points"""
     points = np.array(points)
     n, d = points.shape
     
@@ -52,7 +51,6 @@ class CechComplex(SimplicialComplex):
         self.import_simplices(self.construct_simplices())
 
     def construct_simplices(self):
-        """Construct Čech complex by checking circumradius condition"""
         simplices = []
         n = len(self.pts)
         
